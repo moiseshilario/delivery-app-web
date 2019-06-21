@@ -1,23 +1,24 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr';
 
-function App() {
+import './config/ReactotronConfig';
+
+import GlobalStyle from './styles/global';
+
+import { Wrapper } from './styles/components';
+
+import Routes from './routes';
+import store from './store/index';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Wrapper>
+        <GlobalStyle />
+        <Routes />
+        <ReduxToastr />
+      </Wrapper>
+    </Provider>
   );
 }
-
-export default App;

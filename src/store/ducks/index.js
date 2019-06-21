@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
+import { reducer as toastr } from 'react-redux-toastr';
 
 import orders from './orders';
-import error from './error';
-import user from './user';
+import auth from './auth';
 
 export default combineReducers({
+  auth,
   orders,
-  user,
-  error,
+  toastr,
 });
