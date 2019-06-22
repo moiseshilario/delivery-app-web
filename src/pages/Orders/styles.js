@@ -1,0 +1,52 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const Header = styled.div`
+  width: 100%;
+  background: #0b2031;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  color: #fff;
+`;
+
+export const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Logo = styled.img`
+  width: 32px;
+  height: 32px;
+  margin-right: 14px;
+`;
+
+export const BrandName = styled.h1`
+  font-family: Helvetica-Bold;
+  font-size: 18px;
+  letter-spacing: 0;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+export const UserName = styled.p`
+  font-family: Helvetica-Bold;
+  font-size: 16px;
+  text-transform: capitalize;
+`;
+
+export const LogoutButton = styled.span`
+  opacity: 0.6;
+  font-family: Helvetica;
+  font-size: 14px;
+  cursor: pointer;
+`;

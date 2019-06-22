@@ -1,20 +1,51 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import api from '../../services/api';
+import { Creators as AuthActions } from '../../store/ducks/auth';
 
-// import { Container } from './styles';
+import {
+  Container,
+  Header,
+  Logo,
+  UserInfo,
+  LogoContainer,
+  BrandName,
+  UserName,
+  LogoutButton,
+} from './styles';
 
-const Orders = () => {
+import LogoSVG from '../../assets/logo.svg';
+
+const Orders = ({ user }) => {
   useEffect(() => {
-    api.get('/test');
+    const getUser = async () => {
+      api.get('');
+    };
   }, []);
 
   return (
-    <div>
+    <Container>
+      <Header>
+        <LogoContainer>
+          <Logo src={LogoSVG} />
+          <BrandName>Pizzaria Don Juan</BrandName>
+        </LogoContainer>
+        <UserInfo>
+          <UserName>{user.name}</UserName>
+          <LogoutButton type="button">Sair do app</LogoutButton>
+        </UserInfo>
+      </Header>
       orders
       <Link to="/login">Login</Link>
-    </div>
+    </Container>
   );
 };
 
-export default Orders;
+const mapStateToProps = state => ({
+  user: state.auth.loggedUser,
+});
+
+export default connect(mapStateToProps)(Orders);

@@ -11,8 +11,16 @@ export function* signIn(action) {
   try {
     const response = yield call(api.post, 'session', { email, password });
 
-    localStorage.setItem('@DeliveryApp:token', response.data.token);
-    yield put(AuthActions.signInSuccess(response.data.token));
+    const authData = {
+      user: {
+        name: response.data.user.name,
+        email: response.data.user.email,
+      },
+      token: response.data.token,
+    };
+    localStorage.setItem('@DeliveryApp:token', authData.token);
+    localStorage.setItem('@DeliveryApp:user', JSON.stringify(authData.user));
+    yield put(AuthActions.signInSuccess(authData));
     yield put(push('/orders'));
   } catch (err) {
     yield put(

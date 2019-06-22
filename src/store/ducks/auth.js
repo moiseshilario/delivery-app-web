@@ -17,9 +17,9 @@ export const Creators = {
     payload: { email, password },
   }),
 
-  signInSuccess: token => ({
+  signInSuccess: data => ({
     type: Types.SIGN_SUCCESS,
-    payload: { token },
+    payload: { data },
   }),
 };
 
@@ -29,12 +29,18 @@ export const Creators = {
 const INITIAL_STATE = {
   signedIn: !!localStorage.getItem('@DeliveryApp:token'),
   token: localStorage.getItem('@DeliveryApp:token'),
+  loggedUser: JSON.parse(localStorage.getItem('@DeliveryApp:user')),
 };
 
 export default function user(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.SIGN_SUCCESS:
-      return { ...state, signedIn: true, token: action.payload.token };
+      return {
+        ...state,
+        signedIn: true,
+        token: action.payload.data.token,
+        loggedUser: action.payload.data.user,
+      };
     default:
       return state;
   }
