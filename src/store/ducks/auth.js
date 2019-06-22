@@ -27,8 +27,8 @@ export const Creators = {
  * Reducers
  */
 const INITIAL_STATE = {
-  signedIn: false,
-  token: null,
+  signedIn: !!localStorage.getItem('@DeliveryApp:token'),
+  token: localStorage.getItem('@DeliveryApp:token'),
 };
 
 export default function user(state = INITIAL_STATE, action) {
