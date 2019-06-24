@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import api from '../../services/api';
-import { Creators as AuthActions } from '../../store/ducks/auth';
+// import api from '../../services/api';
 
 import {
   Container,
@@ -15,33 +13,38 @@ import {
   BrandName,
   UserName,
   LogoutButton,
+  Content,
+  PageTitle,
 } from './styles';
+
+import OrderItem from '../../components/OrderItem';
 
 import LogoSVG from '../../assets/logo.svg';
 
-const Orders = ({ user }) => {
-  useEffect(() => {
-    const getUser = async () => {
-      api.get('');
-    };
-  }, []);
+const Orders = ({ user }) => (
+  <Container>
+    <Header>
+      <LogoContainer>
+        <Logo src={LogoSVG} />
+        <BrandName>Pizzaria Don Juan</BrandName>
+      </LogoContainer>
+      <UserInfo>
+        <UserName>{user.name}</UserName>
+        <LogoutButton type="button">Sair do app</LogoutButton>
+      </UserInfo>
+    </Header>
 
-  return (
-    <Container>
-      <Header>
-        <LogoContainer>
-          <Logo src={LogoSVG} />
-          <BrandName>Pizzaria Don Juan</BrandName>
-        </LogoContainer>
-        <UserInfo>
-          <UserName>{user.name}</UserName>
-          <LogoutButton type="button">Sair do app</LogoutButton>
-        </UserInfo>
-      </Header>
-      orders
-      <Link to="/login">Login</Link>
-    </Container>
-  );
+    <Content>
+      <PageTitle>Últimos Pedidos</PageTitle>
+      <OrderItem />
+    </Content>
+  </Container>
+);
+
+Orders.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({

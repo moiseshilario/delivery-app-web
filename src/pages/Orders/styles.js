@@ -50,3 +50,19 @@ export const LogoutButton = styled.span`
   font-size: 14px;
   cursor: pointer;
 `;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: 20px auto;
+`;
+
+export const PageTitle = styled.h2`
+  font-family: Helvetica-Bold;
+  font-size: 18px;
+  color: #333333;
+  align-self: flex-start;
+  margin-bottom: 15px;
+`;
