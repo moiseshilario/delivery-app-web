@@ -15,20 +15,16 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "rules": {
     "react/jsx-filename-extension": [
       "error",
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "import/prefer-default-export": "off",
+    "import/no-cycle": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/require-default-props": "off"
   }

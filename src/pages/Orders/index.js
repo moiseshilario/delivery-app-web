@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as OrdersActions } from '../../store/ducks/orders';
-// import api from '../../services/api';
+import { Creators as AuthActions } from '../../store/ducks/auth';
 
 import {
   Container,
@@ -24,7 +24,9 @@ import Order from '../../components/Order';
 
 import LogoSVG from '../../assets/logo.svg';
 
-const Orders = ({ user, orders, getOrderRequest }) => {
+const Orders = ({
+  user, orders, getOrderRequest, logout,
+}) => {
   useEffect(() => {
     const getOrders = async () => {
       await getOrderRequest();
@@ -41,7 +43,9 @@ const Orders = ({ user, orders, getOrderRequest }) => {
         </LogoContainer>
         <UserInfo>
           <UserName>{user.name}</UserName>
-          <LogoutButton type="button">Sair do app</LogoutButton>
+          <LogoutButton type="button" onClick={() => logout()}>
+            Sair do app
+          </LogoutButton>
         </UserInfo>
       </Header>
 
@@ -62,10 +66,13 @@ Orders.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
   }),
-  orders: PropTypes.shape({
-    id: PropTypes.number,
-  }).isRequired,
+  orders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  ).isRequired,
   getOrderRequest: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -73,7 +80,13 @@ const mapStateToProps = state => ({
   orders: state.orders.data,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(OrdersActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    ...OrdersActions,
+    ...AuthActions,
+  },
+  dispatch,
+);
 
 export default connect(
   mapStateToProps,

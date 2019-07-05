@@ -9,19 +9,28 @@ import { Creators as ErrorActions } from '../ducks/error';
 export function* signIn(action) {
   const { email, password } = action.payload;
   try {
-    const response = yield call(api.post, 'session', { email, password });
-
-    const authData = {
-      user: {
-        name: response.data.user.name,
-        email: response.data.user.email,
-      },
-      token: response.data.token,
-    };
-    localStorage.setItem('@DeliveryApp:token', authData.token);
-    localStorage.setItem('@DeliveryApp:user', JSON.stringify(authData.user));
-    yield put(AuthActions.signInSuccess(authData));
-    yield put(push('/orders'));
+    const { data } = yield call(api.post, 'session', { email, password });
+    if (data.user.admin) {
+      const authData = {
+        user: {
+          name: data.user.name,
+          email: data.user.email,
+        },
+        token: data.token,
+      };
+      localStorage.setItem('@DeliveryApp:token', authData.token);
+      localStorage.setItem('@DeliveryApp:user', JSON.stringify(authData.user));
+      yield put(AuthActions.signInSuccess(authData));
+      yield put(push('/orders'));
+    } else {
+      yield put(
+        toastrActions.add({
+          type: 'error',
+          title: 'Falha no login',
+          message: 'Não autorizado',
+        }),
+      );
+    }
   } catch (err) {
     yield put(
       toastrActions.add({
@@ -32,4 +41,10 @@ export function* signIn(action) {
     );
     yield put(ErrorActions.setError(err));
   }
+}
+
+export function* logout() {
+  localStorage.removeItem('@DeliveryApp:token');
+  localStorage.removeItem('@DeliveryApp:user');
+  yield put(push('/login'));
 }

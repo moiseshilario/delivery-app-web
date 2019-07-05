@@ -4,7 +4,7 @@
 export const Types = {
   SIGN_REQUEST: 'user/SIGN_REQUEST',
   SIGN_SUCCESS: 'user/SIGN_SUCCESS',
-  SIGN_ERROR: 'user/SIGN_ERROR',
+
   LOGOUT: 'user/LOGOUT',
 };
 
@@ -20,6 +20,10 @@ export const Creators = {
   signInSuccess: data => ({
     type: Types.SIGN_SUCCESS,
     payload: { data },
+  }),
+
+  logout: () => ({
+    type: Types.LOGOUT,
   }),
 };
 
@@ -41,6 +45,8 @@ export default function user(state = INITIAL_STATE, action) {
         token: action.payload.data.token,
         loggedUser: action.payload.data.user,
       };
+    case Types.LOGOUT:
+      return { signedIn: false, token: null, loggedUser: null };
     default:
       return state;
   }

@@ -9,7 +9,7 @@ import {
 } from './styles';
 import Product from '../Product';
 
-moment.locale('pt-br', ptBr);
+moment.updateLocale('pt-br', ptBr);
 
 const Order = ({ userOrder: { order, orderItems }, index }) => (
   <Container>
@@ -23,9 +23,7 @@ const Order = ({ userOrder: { order, orderItems }, index }) => (
       ))}
     </ProductsContainer>
     <Observation>
-      <p>
-        <strong>Observações:</strong> {order.observation}
-      </p>
+      <strong>Observações:</strong> {order.observation}
     </Observation>
   </Container>
 );
@@ -39,9 +37,11 @@ Order.propTypes = {
       updatedAt: PropTypes.string,
       total: PropTypes.number,
     }),
-    orderItems: PropTypes.shape({
-      id: PropTypes.number,
-    }),
+    orderItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+      }),
+    ),
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
