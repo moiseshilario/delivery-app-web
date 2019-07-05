@@ -1,8 +1,10 @@
 import axios from 'axios';
 import store from '../store';
 
+const baseURL = 'http://localhost:3333';
+
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL,
 });
 
 api.interceptors.request.use((config) => {
@@ -18,3 +20,5 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+
+export const imagesURL = `${baseURL}/files`;

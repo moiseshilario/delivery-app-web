@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
   border-radius: 5px;
   box-shadow: 0 0 5px 2px #ddd;
   padding: 20px;
+  margin: 20px 0;
 `;
 
 export const OrderTitle = styled.h1`
@@ -37,13 +37,9 @@ export const ProductsContainer = styled.div`
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   margin: 20px 0;
-`;
-
-export const Product = styled.div`
-  border: 1px solid #ddd;
-  width: 150px;
-  height: 80px;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const Observation = styled.p`
