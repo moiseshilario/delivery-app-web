@@ -25,19 +25,15 @@ const Product = ({ item }) => (
 );
 
 Product.propTypes = {
-  userOrder: PropTypes.shape({
-    order: PropTypes.shape({
-      user: PropTypes.shape({
-        name: PropTypes.string,
-      }),
-      updatedAt: PropTypes.string,
-      total: PropTypes.number,
+  item: PropTypes.shape({
+    type: PropTypes.shape({
+      image: PropTypes.string,
+      name: PropTypes.string,
     }),
-    orderItems: PropTypes.shape({
-      id: PropTypes.number,
+    size: PropTypes.shape({
+      description: PropTypes.string,
     }),
   }).isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default Product;

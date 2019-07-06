@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,7 +16,6 @@ const Login = ({ signInRequest }) => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
-    console.log('TCL: handleSubmit -> e', e);
     e.preventDefault();
 
     signInRequest(email, password);
@@ -50,6 +50,10 @@ const Login = ({ signInRequest }) => {
       </Wrapper>
     </Container>
   );
+};
+
+Login.propTypes = {
+  signInRequest: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);

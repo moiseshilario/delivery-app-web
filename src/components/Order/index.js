@@ -9,7 +9,7 @@ import {
 } from './styles';
 import Product from '../Product';
 
-moment.updateLocale('pt-br', ptBr);
+moment.defineLocale('pt-br', ptBr);
 
 const Order = ({ userOrder: { order, orderItems }, index }) => (
   <Container>

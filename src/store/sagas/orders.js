@@ -11,7 +11,6 @@ export function* getOrders() {
     yield put(ErrorActions.hideError());
     yield put(ordersActions.getOrdersuccess(response.data));
   } catch (err) {
-    console.err(err);
     yield put(ErrorActions.setError('User not found or wrong credentials'));
   }
 }

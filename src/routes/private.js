@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 import store from '../store';
@@ -15,9 +15,5 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
-
-PrivateRoute.propTypes = {
-  component: PropTypes.func.isRequired,
-};
 
 export default PrivateRoute;

@@ -7,6 +7,7 @@ export const Container = styled.div`
   box-shadow: 0 0 5px 2px #ddd;
   padding: 20px;
   margin: 20px 0;
+  width: 100%;
 `;
 
 export const OrderTitle = styled.h1`

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Loader from 'react-loader-spinner';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,7 +26,7 @@ import Order from '../../components/Order';
 import LogoSVG from '../../assets/logo.svg';
 
 const Orders = ({
-  user, orders, getOrderRequest, logout,
+  user, orders, getOrderRequest, logout, loading,
 }) => {
   useEffect(() => {
     const getOrders = async () => {
@@ -52,6 +53,7 @@ const Orders = ({
       <Content>
         <PageTitle>Últimos Pedidos</PageTitle>
         <OrdersContainer>
+          {loading && <Loader type="Oval" color="#0b2031" height="100" width="100" />}
           {!!orders.length
             && orders.map((userOrder, index) => (
               <Order userOrder={userOrder} key={userOrder.order.id} index={index + 1} />
@@ -71,6 +73,7 @@ Orders.propTypes = {
       id: PropTypes.number,
     }),
   ).isRequired,
+  loading: PropTypes.bool.isRequired,
   getOrderRequest: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
 };
@@ -78,6 +81,7 @@ Orders.propTypes = {
 const mapStateToProps = state => ({
   user: state.auth.loggedUser,
   orders: state.orders.data,
+  loading: state.orders.loading,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
