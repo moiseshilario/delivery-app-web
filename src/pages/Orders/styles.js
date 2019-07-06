@@ -87,4 +87,5 @@ export const PageTitle = styled.h2`
 export const OrdersContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
 `;
